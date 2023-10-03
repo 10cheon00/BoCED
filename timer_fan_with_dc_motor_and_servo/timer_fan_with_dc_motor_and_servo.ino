@@ -3,22 +3,22 @@
 #define __DEBUG__
 
 const int PIN_D_RSTN = A0;
-const int PIN_TR_BASE = A1;
+const int PIN_MOTOR = 3;
 const int PIN_BTN_TIMER = 4;
 const int PIN_BTN_POWER = 7;
 const int PIN_LED_POWER = 8;
 const int PIN_SERVO = 9;
-const int PIN_MOTOR = 10;
 
 Servo timerServo;
+
 const int TIMER_MAX = 10;
 const int SERVO_ANGLE_MAX = 180;
 const int TIMER_PRESET_COUNT = 3;
-const int ARRAY_TIMER_PRESET[TIMER_PRESET_COUNT] = {0, TIMER_MAX / 2, TIMER_MAX };
+const int ARRAY_TIMER_PRESET[TIMER_PRESET_COUNT] = { 0, TIMER_MAX / 2, TIMER_MAX };
 double timer = 0.0f;
 int timerPresetIndex = 0;
 
-bool power = false;
+bool power = true;
 
 int powerBtnState = 0;
 int prevPowerBtnState = 0;
@@ -36,7 +36,6 @@ void setup() {
   pinMode(PIN_LED_POWER, OUTPUT);
   pinMode(PIN_MOTOR, OUTPUT);
   pinMode(PIN_D_RSTN, INPUT);
-  pinMode(PIN_TR_BASE, OUTPUT);
 
   timerServo.attach(PIN_SERVO);
 
@@ -68,10 +67,10 @@ void loop() {
     if(isTimerEnd()) {
       togglePowerState();
     }
-  
+    Serial.println(motorSpeed);
+
     delay(100);
-  }
-  else{
+  } else {
     turnOffPowerLED();
     setMotorSpeedZero();
   }
@@ -124,11 +123,11 @@ void mapDynamicResistanceToMotorSpeed() {
 }
 
 void updateMotorSpeed() {
-  analogWrite(PIN_TR_BASE, motorSpeed);
+  analogWrite(PIN_MOTOR, motorSpeed);
 }
 
 void decreaseTimer() {
-  if(timer >= 0.1f){
+  if (timer >= 0.1f) {
     timer -= 0.1f;
   }
 }
@@ -147,5 +146,5 @@ void turnOffPowerLED() {
 
 void setMotorSpeedZero() {
   motorSpeed = 0;
-  analogWrite(PIN_TR_BASE, motorSpeed);
+  analogWrite(PIN_MOTOR, motorSpeed);
 }
