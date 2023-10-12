@@ -26,7 +26,7 @@ void loop() {
   if (millis() - elapsedTime > (unsigned long)(1000.0 / (double)frame)){
     game->update();
 
-    game->refreshInput();c:\Users\10che\Documents\Arduino\BoCED\snake_game\c_cpp_properties.json
+    game->refreshInput();
     elapsedTime = millis();
   }
   game->render();

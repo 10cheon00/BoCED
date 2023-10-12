@@ -32,7 +32,7 @@ void Game::initialize() {
   addBody(Coord(MAP_WIDTH / 2, MAP_HEIGHT / 2));
   addBody(Coord(MAP_WIDTH / 2, MAP_HEIGHT / 2 + 1));
   createPoint();
-  point = 21;
+  point = 0;
 }
 
 void Game::refreshInput() {
