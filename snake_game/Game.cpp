@@ -4,35 +4,36 @@
 #include <time.h>
 
 Game::Game() {
+  // initialize 8x8 dot matrix.
   led = new LedControl(PIN_LED_DIN, PIN_LED_CLK, PIN_LED_CS);
   led->shutdown(0, false);
   led->setIntensity(0, 8);
   led->clearDisplay(0);
-
+  // initialize i2c lcd.
   lcd = new LiquidCrystal_I2C(ADDRESS_LCD, 16, 2);
   lcd->init();
   lcd->backlight();
-
+  // initialize buttons.
   pinMode(PIN_LEFT_BTN, INPUT);
   pinMode(PIN_RIGHT_BTN, INPUT);
-
-  srand(time(NULL));
-
+  // initialize other game logic.
   refreshInput();
-  
+  srand(time(NULL));
   gameState = INIT;
 }
 
 void Game::initialize() {
   angle = 0;
   bodyCount = 0;
-  strcpy(lcdStr[0], "    Snake Game  ");
-  strcpy(lcdStr[1], "  Press any Btn ");
 
   addBody(Coord(MAP_WIDTH / 2, MAP_HEIGHT / 2));
   addBody(Coord(MAP_WIDTH / 2, MAP_HEIGHT / 2 + 1));
   createPoint();
   point = 0;
+
+  // set lcd texts.
+  strcpy(lcdStr[0], "    Snake Game  ");
+  strcpy(lcdStr[1], "  Press any Btn ");
 }
 
 void Game::refreshInput() {
@@ -157,6 +158,7 @@ void Game::addBody(Coord coord) {
 void Game::createPoint() {
   int coord[64], size = 0;
   for (int i = 0; i < 64; i++) {
+    if(i%8==0 || i%8==7 || i<8 || i>57) continue;
     bool isExist = false;
     for(int j = 0; j < bodyCount; j++) {
       if (i == bodyCoords[j].x + bodyCoords[j].y * MAP_HEIGHT) {
