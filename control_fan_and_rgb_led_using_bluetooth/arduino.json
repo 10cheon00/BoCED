@@ -1,0 +1,5 @@
+{
+    "board": "arduino:avr:uno",
+    "sketch": "control_pan_using_bluetooth.ino",
+    "port": "COM8"
+}

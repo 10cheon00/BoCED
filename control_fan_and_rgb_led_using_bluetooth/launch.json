@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/10che/Documents/Arduino/sketch_oct17a",
-      "program": "c:/Users/10che/Documents/Arduino/sketch_oct17a/build/Debug/outDebug",
+      "cwd": "c:/Users/10che/Documents/Arduino/BoCED/control_pan_using_bluetooth",
+      "program": "c:/Users/10che/Documents/Arduino/BoCED/control_pan_using_bluetooth/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
