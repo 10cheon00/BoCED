@@ -67,7 +67,6 @@ void loop() {
     if(isTimerEnd()) {
       togglePowerState();
     }
-    Serial.println(motorSpeed);
 
     delay(100);
   } else {
